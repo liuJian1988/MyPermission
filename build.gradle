@@ -1,0 +1,64 @@
+apply plugin: 'com.android.library'
+/*apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'maven'
+
+group='com.github.shenmiliang'*/
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 10
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        android.libraryVariants.all { variant ->
+            if (variant.name.equalsIgnoreCase("release")) {
+                variant.outputs.all { output ->
+                    def f = output.outputFileName
+                    if (f != null && f.endsWith('.aar')) {
+                        def fileName = "permission-${defaultConfig.versionName}.aar"
+                        output.outputFileName = fileName
+                    }
+                }
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.+'
+    testCompile 'junit:junit:4.12'
+}
+
+/*buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+    }
+
+}*/
+apply from: 'bintray.gradle'
+
+
+
